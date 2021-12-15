@@ -70,6 +70,8 @@ label {
 .Menu-form {
   padding: 50px;
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .Form {
@@ -82,6 +84,7 @@ label {
 }
 
 .Form-group {
+  width: 100%;
   padding-bottom: 20px;
 }
 
@@ -173,4 +176,19 @@ label {
   left: 50%;
   writing-mode: vertical-lr;
   transform: rotate(-180deg) translateX(50%);
+}
+
+.Message {
+  padding: 30px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.Message--error {
+  color: #db3131;
+}
+
+.Message--success {
+  color: #000000;
 }

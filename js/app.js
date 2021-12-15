@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const sortingContainer = document.querySelector(".Sorting");
   const form = document.querySelector(".Form");
-  const mainContainer = document.querySelector(".Main");
+  const message = document.querySelector(".Message");
+
   let items = [];
   let speed = 1;
   let isSorting = false;
@@ -10,9 +11,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     e.preventDefault();
 
     if (isSorting) {
-      console.log("teraz nie mozna");
+      setMessage("error", "Poczekaj, aż sortowanie się zakończy");
       return;
     }
+
+    clearMessage();
 
     const elems = Number(e.target.elements["elems"].value.trim());
     const min = Number(e.target.elements["min"].value.trim());
@@ -20,12 +23,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     const sortType = e.target.elements["sortType"].value.trim();
     speed = Number(e.target.elements["duration"].value.trim());
 
-    generateItems(elems, min, max);
+    if (validateForm(elems, min, max)) {
+      generateItems(elems, min, max);
 
-    if (sortType === "bubble") {
-      await bubbleSort();
+      let startTime = performance.now();
+
+      if (sortType === "bubble") {
+        await bubbleSort();
+      }
+
+      let endTime = performance.now();
+      setMessage("success", `Czas wykonania: ${endTime - startTime} ms`);
     }
   });
+
+  const validateForm = (elems, min, max) => {
+    if (!(elems > 0 && elems <= 100)) {
+      setMessage("error", "Ilość elementów może być między 0 a 100.");
+      return false;
+    }
+
+    if (!(min > 0 && min <= 1000)) {
+      setMessage("error", "Wartość minimalna może być miedzy 1 a 1000");
+      return false;
+    }
+
+    if (!(max > 0 && max <= 1000)) {
+      setMessage("error", "Wartość maksymalna może być miedzy 1 a 1000");
+      return false;
+    }
+
+    if (min > max) {
+      setMessage(
+        "error",
+        "Minimalna wartość nie może być więszka niż maksymalna.",
+      );
+      return false;
+    }
+
+    return true;
+  };
 
   const generateItems = (n, min, max) => {
     sortingContainer.innerHTML = "";
@@ -54,8 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       items.push(bar);
     }
 
-    mainContainer.style.paddingBottom = `calc(55vh - ${currentMax}px)`;
-    console.log(items);
+    sortingContainer.style.paddingBottom = `calc(55vh - ${currentMax}px)`;
   };
 
   const getRandomInt = (min, max) => {
@@ -130,5 +166,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   const disableSorting = () => {
     isSorting = false;
     document.querySelector(".Form-submit").disabled = false;
+  };
+
+  const setMessage = (type, text) => {
+    message.innerText = text;
+
+    if (type === "error") {
+      message.classList.add("Message--error");
+    }
+
+    if (type === "success") {
+      message.classList.add("Message--success");
+    }
+  };
+
+  const clearMessage = () => {
+    if (message.classList.contains("Message--error")) {
+      message.classList.remove("Message--error");
+    }
+
+    if (message.classList.contains("Message--success")) {
+      message.classList.remove("Message--success");
+    }
+
+    message.innerText = "";
   };
 });
