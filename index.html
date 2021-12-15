@@ -14,6 +14,58 @@
     <title>Sorting Visualized</title>
   </head>
   <body>
+    <div class="Wrapper">
+      <aside class="Menu">
+        <div class="Menu-logoWrapper">
+          <img src="img/logo.png" alt="Site logo" class="Menu-logo" />
+        </div>
+        <div class="Menu-form">
+          <form action="POST" class="Form">
+            <div class="Form-group">
+              <label for="" class="Form-label">Ilość Elementów</label>
+              <input type="number" class="Form-input" name="elems" value="30" />
+            </div>
+            <div class="Form-columns">
+              <div class="Form-group">
+                <label for="" class="Form-label">Minimum</label>
+                <input type="number" class="Form-input" name="min" value="1" />
+              </div>
+              <div class="Form-group">
+                <label for="" class="Form-label">Maksimum</label>
+                <input
+                  type="number"
+                  class="Form-input"
+                  name="max"
+                  value="500"
+                />
+              </div>
+            </div>
+            <div class="Form-group">
+              <label for="" class="Form-label">Szybkość Animacji</label>
+              <select class="Form-input" name="duration">
+                <option value="0.5">0.5x</option>
+                <option value="1">1x</option>
+                <option value="2">2x</option>
+                <option value="4" selected>4x</option>
+                <option value="8">8x</option>
+              </select>
+            </div>
+            <div class="Form-group">
+              <label for="" class="Form-label">Rodzaj Sortowania</label>
+              <select class="Form-input" name="sortType">
+                <option value="bubble" selected>Bubble Sort</option>
+                <option value="insert">Insert Sort</option>
+                <option value="select">Select Sort</option>
+              </select>
+            </div>
+            <input type="submit" value="Sortuj" class="Form-submit" />
+          </form>
+        </div>
+      </aside>
+      <main class="Main">
+        <section class="Sorting"></section>
+      </main>
+    </div>
     <script src="js/app.js"></script>
   </body>
 </html>
