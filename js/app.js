@@ -21,15 +21,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     const min = Number(e.target.elements["min"].value.trim());
     const max = Number(e.target.elements["max"].value.trim());
     const sortType = e.target.elements["sortType"].value.trim();
+    const sortComparing = e.target.elements["sortComparing"].value.trim();
     speed = Number(e.target.elements["duration"].value.trim());
 
     if (validateForm(elems, min, max)) {
       generateItems(elems, min, max);
 
       let startTime = performance.now();
+      let comparing = sortComparing === "asc" ? true : false;
 
       if (sortType === "bubble") {
-        await bubbleSort();
+        await bubbleSort(comparing);
+      }
+
+      if (sortType === "insert") {
+        await insertSort(comparing);
+      }
+
+      if (sortType === "select") {
+        await selectSort(comparing);
       }
 
       let endTime = performance.now();
@@ -105,13 +115,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       }, 100 / speed);
     });
 
-  const compare = async (index1, index2) => {
+  const compare = async (index1, index2, comparing = true) => {
     await delay();
     let value1 = Number(items[index1].dataset.value);
     let value2 = Number(items[index2].dataset.value);
-    if (value1 > value2) {
-      return true;
+    if (comparing) {
+      if (value1 > value2) {
+        return true;
+      }
+    } else {
+      if (value1 < value2) {
+        return true;
+      }
     }
+
     return false;
   };
 
@@ -136,26 +153,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const unmark = async (index) => {
     items[index].classList.remove("Bar--current");
+    if (items[index].classList.contains("Bar--currentMin")) {
+      items[index].classList.remove("Bar--currentMin");
+    }
   };
 
-  const bubbleSort = async () => {
-    enableSorting();
-
-    for (let i = 0; i < items.length - 1; ++i) {
-      for (let j = 0; j < items.length - i - 1; ++j) {
-        await mark(j);
-        await mark(j + 1);
-        if (await compare(j, j + 1)) {
-          await swap(j, j + 1);
-        }
-        await unmark(j);
-        await unmark(j + 1);
-      }
-      items[items.length - i - 1].classList.add("Bar--done");
-    }
-    items[0].classList.add("Bar--done");
-
-    disableSorting();
+  const markSpl = async (index) => {
+    items[index].classList.add("Bar--currentMin");
   };
 
   const enableSorting = () => {
@@ -190,5 +194,73 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     message.innerText = "";
+  };
+
+  const bubbleSort = async (comparing) => {
+    enableSorting();
+
+    for (let i = 0; i < items.length - 1; ++i) {
+      for (let j = 0; j < items.length - i - 1; ++j) {
+        await mark(j);
+        await mark(j + 1);
+        if (await compare(j, j + 1, comparing)) {
+          await swap(j, j + 1);
+        }
+        await unmark(j);
+        await unmark(j + 1);
+      }
+      items[items.length - i - 1].classList.add("Bar--done");
+    }
+    items[0].classList.add("Bar--done");
+
+    disableSorting();
+  };
+
+  const insertSort = async (comparing) => {
+    enableSorting();
+
+    for (let i = 0; i < items.length - 1; ++i) {
+      let j = i;
+      while (j >= 0 && (await compare(j, j + 1, comparing))) {
+        await mark(j);
+        await mark(j + 1);
+        await delay();
+        await swap(j, j + 1);
+        await unmark(j);
+        await unmark(j + 1);
+        j -= 1;
+      }
+    }
+    for (let counter = 0; counter < items.length; ++counter) {
+      items[counter].classList.add("Bar--done");
+    }
+
+    disableSorting();
+  };
+
+  const selectSort = async (comparing) => {
+    enableSorting();
+
+    for (let i = 0; i < items.length; ++i) {
+      let minIndex = i;
+      for (let j = i; j < items.length; ++j) {
+        await markSpl(minIndex);
+        await mark(j);
+        if (await compare(minIndex, j, comparing)) {
+          await unmark(minIndex);
+          minIndex = j;
+        }
+        await unmark(j);
+        await markSpl(minIndex);
+      }
+      await mark(minIndex);
+      await mark(i);
+      await delay();
+      await swap(minIndex, i);
+      await unmark(minIndex);
+      items[i].classList.add("Bar--done");
+    }
+
+    disableSorting();
   };
 });

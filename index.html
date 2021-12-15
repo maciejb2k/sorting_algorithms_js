@@ -51,9 +51,18 @@
               </select>
             </div>
             <div class="Form-group">
+              <label for="" class="Form-label">Porównywanie</label>
+              <select class="Form-input" name="sortComparing">
+                <option value="asc" selected>Rosnąco</option>
+                <option value="desc">Malejąco</option>
+              </select>
+            </div>
+            <div class="Form-group">
               <label for="" class="Form-label">Rodzaj Sortowania</label>
               <select class="Form-input" name="sortType">
                 <option value="bubble" selected>Bubble Sort</option>
+                <option value="insert">Insert Sort</option>
+                <option value="select">Select Sort</option>
               </select>
             </div>
             <input type="submit" value="Sortuj" class="Form-submit" />
