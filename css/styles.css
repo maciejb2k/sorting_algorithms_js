@@ -61,6 +61,7 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .Menu-logoWrapper {
@@ -195,4 +196,63 @@ label {
 
 .Message--success {
   color: #000000;
+}
+
+/* RWD */
+
+.ButtonOpen {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  font-weight: 600;
+  display: none;
+  background-color: #563bff;
+  color: #ffffff;
+}
+
+.ButtonClose {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  font-weight: 600;
+  background-color: #db3131;
+  color: #ffffff;
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  body {
+    overflow-y: scroll;
+  }
+
+  .ButtonOpen,
+  .ButtonClose {
+    display: block;
+  }
+
+  .Wrapper {
+    flex-direction: column;
+  }
+
+  .Menu {
+    width: 100%;
+    flex-direction: column;
+    display: none;
+  }
+
+  .Menu--open {
+    display: block;
+  }
+
+  .Menu-logoWrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px 80px 10px;
+  }
 }

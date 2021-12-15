@@ -2,10 +2,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sortingContainer = document.querySelector(".Sorting");
   const form = document.querySelector(".Form");
   const message = document.querySelector(".Message");
+  const menu = document.querySelector(".Menu");
+  const buttonOpenMobile = document.querySelector(".ButtonOpen");
+  const buttonCloseMobile = document.querySelector(".ButtonClose");
 
   let items = [];
   let speed = 1;
   let isSorting = false;
+
+  buttonOpenMobile.addEventListener("click", () => {
+    menu.classList.add("Menu--open");
+  });
+
+  buttonCloseMobile.addEventListener("click", () => {
+    menu.classList.remove("Menu--open");
+  });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -164,6 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const enableSorting = () => {
     isSorting = true;
+    menu.classList.remove("Menu--open");
     document.querySelector(".Form-submit").disabled = true;
   };
 
