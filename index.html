@@ -23,27 +23,44 @@
         <div class="Menu-form">
           <form action="POST" class="Form">
             <div class="Form-group">
-              <label for="" class="Form-label">Ilość Elementów</label>
-              <input type="number" class="Form-input" name="elems" value="30" />
+              <label for="Input-maxElems" class="Form-label"
+                >Ilość Elementów</label
+              >
+              <input
+                type="number"
+                class="Form-input"
+                name="elems"
+                value="30"
+                id="Input-maxElems"
+              />
             </div>
             <div class="Form-columns">
               <div class="Form-group">
-                <label for="" class="Form-label">Minimum</label>
-                <input type="number" class="Form-input" name="min" value="1" />
+                <label for="Input-minValue" class="Form-label">Minimum</label>
+                <input
+                  type="number"
+                  class="Form-input"
+                  name="min"
+                  value="1"
+                  id="Input-minValue"
+                />
               </div>
               <div class="Form-group">
-                <label for="" class="Form-label">Maksimum</label>
+                <label for="Input-maxValue" class="Form-label">Maksimum</label>
                 <input
                   type="number"
                   class="Form-input"
                   name="max"
                   value="500"
+                  id="Input-maxValue"
                 />
               </div>
             </div>
             <div class="Form-group">
-              <label for="" class="Form-label">Szybkość Animacji</label>
-              <select class="Form-input" name="duration">
+              <label for="Input-speed" class="Form-label"
+                >Szybkość Animacji</label
+              >
+              <select class="Form-input" name="duration" id="Input-speed">
                 <option value="0.5">0.5x</option>
                 <option value="1">1x</option>
                 <option value="2">2x</option>
@@ -52,15 +69,23 @@
               </select>
             </div>
             <div class="Form-group">
-              <label for="" class="Form-label">Porównywanie</label>
-              <select class="Form-input" name="sortComparing">
+              <label for="Input-comparing" class="Form-label"
+                >Porównywanie</label
+              >
+              <select
+                class="Form-input"
+                name="sortComparing"
+                id="Input-comparing"
+              >
                 <option value="asc" selected>Rosnąco</option>
                 <option value="desc">Malejąco</option>
               </select>
             </div>
             <div class="Form-group">
-              <label for="" class="Form-label">Rodzaj Sortowania</label>
-              <select class="Form-input" name="sortType">
+              <label for="Input-sortType" class="Form-label"
+                >Rodzaj Sortowania</label
+              >
+              <select class="Form-input" name="sortType" id="Input-sortType">
                 <option value="bubble" selected>Bubble Sort</option>
                 <option value="insert">Insert Sort</option>
                 <option value="select">Select Sort</option>

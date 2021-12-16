@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       items.push(bar);
     }
 
-    sortingContainer.style.paddingBottom = `calc(55vh - ${currentMax}px)`;
+    sortingContainer.style.paddingBottom = `calc(50vh - ${currentMax}px)`;
   };
 
   const getRandomInt = (min, max) => {
