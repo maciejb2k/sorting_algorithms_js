@@ -4,7 +4,7 @@ Projekt na zaliczenie części **JavaScript** z laboratorium **Technologie Inter
 Uniwersytet Rzeszowski, Informatyka I st. II rok
 Wykonał: **Maciej Biel**
 
-Link do działającej wersji: https://ti-project-js.vercel.app/
+Link do działającej wersji: https://maciejb2k.github.io/ti_project_js/
 
 W pliku tym pliku została zawarta wymagana dokumentacja.
 
@@ -47,7 +47,6 @@ Formularz został napisany z użyciem znaczników `<form>`, `<label>` dla pól `
 
 Strona jest w pełni zgodna ze standardami W3C dla HTML i CSS.
 - https://validator.w3.org/nu/?doc=https%3A%2F%2Fti-project-js.vercel.app%2Findex.html
-- https://validator.w3.org/nu/?doc=https%3A%2F%2Fti-project-js.vercel.app%2Fpage.html
 - https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fti-project-js.vercel.app%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=pl-PL
 
 Strona również otrzymała pozytywny wynik SEO, ponieważ spełnia jego podstawowe kryteria:
